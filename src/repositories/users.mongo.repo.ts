@@ -3,7 +3,6 @@ import { Repo } from './repo.interface';
 import createDebug from 'debug';
 import { UserModel } from './users.mongo.model.js';
 import { HTTPError } from '../errors/errors.js';
-import { Document } from 'mongoose';
 const debug = createDebug('Social:repo:users');
 export class UsersMongoRepo implements Repo<User> {
   private static instance: UsersMongoRepo;

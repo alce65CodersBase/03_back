@@ -1,5 +1,4 @@
 import { App } from './app';
-import express from 'express';
 import { HomeController } from './controllers/home.controller';
 
 jest.mock('./helpers/files.js', () => ({
