@@ -46,17 +46,34 @@ export class UsersController extends BaseController<User> {
       if (!(await Auth.compare(req.body.passwd, data[0].passwd)))
         throw new HTTPError(401, 'Unauthorized', 'Password not match');
       console.log({ data });
-      const payload: PayloadToken = {
-        id: data[0].id,
-        email: data[0].email,
-        role: 'admin',
-      };
-      const token = Auth.createJWT(payload);
-      resp.status(202);
-      resp.json({
-        token,
-        results: [data[0]],
-      });
+      this.finalLogin(data[0], resp);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  private async finalLogin(user: User, resp: Response) {
+    const payload: PayloadToken = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    };
+    const token = Auth.createJWT(payload);
+    resp.status(202);
+    resp.json({
+      token,
+      results: [user],
+    });
+  }
+
+  async reLogin(req: RequestPlus, resp: Response, next: NextFunction) {
+    try {
+      debug('Called');
+      if (!req.info)
+        throw new HTTPError(401, 'Not authorized', 'Not info about user');
+      // Tengo el id de usuario del token (req.info.id)
+      const user = await this.repo.queryId(req.info.id);
+      this.finalLogin(user, resp);
     } catch (error) {
       next(error);
     }

@@ -32,10 +32,23 @@ usersRouter.post('/register', controller.register.bind(controller));
 usersRouter.post('/login', controller.login.bind(controller));
 
 usersRouter.patch(
+  '/login',
+  interceptor.logged.bind(interceptor),
+  controller.reLogin.bind(controller)
+);
+
+usersRouter.patch(
+  '/',
+  interceptor.logged.bind(interceptor),
+  interceptor.fromToken.bind(interceptor),
+  controller.patch.bind(controller)
+);
+
+usersRouter.patch(
   '/:id',
   interceptor.logged.bind(interceptor),
   interceptor.admin.bind(interceptor),
-  controller.changeRole.bind(controller)
+  controller.patch.bind(controller)
 );
 
 usersRouter.patch(
@@ -45,4 +58,16 @@ usersRouter.patch(
   controller.changeRole.bind(controller)
 );
 
-usersRouter.delete('/:id', controller.delete.bind(controller));
+usersRouter.delete(
+  '/',
+  interceptor.logged.bind(interceptor),
+  interceptor.fromToken.bind(interceptor),
+  controller.delete.bind(controller)
+);
+
+usersRouter.delete(
+  '/:id',
+  interceptor.logged.bind(interceptor),
+  interceptor.admin.bind(interceptor),
+  controller.delete.bind(controller)
+);
