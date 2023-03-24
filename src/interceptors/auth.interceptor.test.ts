@@ -59,14 +59,27 @@ describe('Given AuthInterceptor class', () => {
       interceptor.admin(req, resp, next);
       expect(next).toHaveBeenLastCalledWith(expect.any(HTTPError));
     });
-    test('Then it should send next(error) if the user role is noT admin', () => {
+    test('Then it should send next(error) if the user role is NOT admin', () => {
       req.info = { id: '', email: '', role: 'user' };
       interceptor.admin(req, resp, next);
       expect(next).toHaveBeenLastCalledWith(expect.any(HTTPError));
     });
-    test('Then it should send next(error) if the user role is noT admin', () => {
+    test('Then it should send next() if the user role is admin', () => {
       req.info = { id: '', email: '', role: 'admin' };
       interceptor.admin(req, resp, next);
+      expect(next).toHaveBeenLastCalledWith();
+    });
+  });
+
+  describe('When fromToken is used', () => {
+    test('Then it should send next(error) if there are NOT user info from the token', () => {
+      delete req.info;
+      interceptor.fromToken(req, resp, next);
+      expect(next).toHaveBeenLastCalledWith(expect.any(HTTPError));
+    });
+    test('Then it should send next() if there ara user info from the token', () => {
+      req.info = { id: '', email: '', role: 'admin' };
+      interceptor.fromToken(req, resp, next);
       expect(next).toHaveBeenLastCalledWith();
     });
   });

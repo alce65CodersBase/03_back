@@ -3,6 +3,8 @@ import { User } from '../entities/user';
 import { Repo } from '../repositories/repo.interface';
 import { UsersController } from './users.controller';
 import { Auth } from '../services/auth.js';
+import { RequestPlus } from '../interfaces/request';
+import { PayloadToken } from '../interfaces/token';
 
 jest.mock('../services/auth.js');
 const mockPasswd = 'test';
@@ -123,6 +125,37 @@ describe('Given login method from UsersController', () => {
       };
       Auth.compare = jest.fn().mockResolvedValue(true);
       await controller.login(req, resp, next);
+      expect(resp.json).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given reLogin method from UsersController', () => {
+  const controller = new UsersController(mockRepo);
+
+  const req = {
+    body: {
+      email: '',
+      passwd: '',
+    },
+  } as RequestPlus;
+
+  describe('When there are not token with date', () => {
+    test('Then next should be called', async () => {
+      delete req.info;
+      await controller.reLogin(req, resp, next);
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe('When ALL is OK', () => {
+    test('Then json should be called', async () => {
+      req.info = {
+        id: '1',
+      } as unknown as PayloadToken;
+
+      await controller.reLogin(req, resp, next);
+      expect(mockRepo.queryId).toHaveBeenCalled();
       expect(resp.json).toHaveBeenCalled();
     });
   });
