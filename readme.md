@@ -63,4 +63,44 @@ Se crea la rama de configuración y utiliza
 - Creación de la PR
 - Verificación de la PR
 
-#
+## Initial server
+
+- Mongoose connection;
+  - DB config file;
+  - Test with real connection
+  - Update secrets in Github Actions config and GitHub Repo
+- HTTP Server
+  - Express App
+  - Helper for __dirname
+  - Test
+  - Static Favicon
+  - Home controller (Routes info in JSON) injected
+- User definition
+  - Entities
+  - Mongoose Schema and Model
+  - Generic CRUD Repo Interface
+  - User CRUD Repo for Mongoose
+  - Repo test
+- Routes
+  - User router:
+    - GET: /(getAll) - /:id (get)
+    - POST: /register - /login
+    - PATCH [logged]: /login
+    - PATCH [logged - fromToken]: /
+    - PATCH [logged - admin]: /:id - /role/:id
+    - DELETE [logged - fromToken]: /
+    - DELETE [logged - admin]: /:id
+  - Base and User controller
+  - Controllers tests
+- Errors
+  - Interface and HTTPError Class
+  - Error Middleware
+  - Tests
+- Auth
+  - Helpers: bcrypt and JWT
+  - Interfaces: token, ExtraRequest
+  - Auth interceptors
+    - logged
+    - admin
+    - fromToken
+  - Tests
