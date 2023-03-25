@@ -3,6 +3,7 @@ import createDebug from 'debug';
 import { UsersController } from '../controllers/users.controller.js';
 import { UsersMongoRepo } from '../repositories/users.mongo.repo.js';
 import { AuthInterceptor } from '../interceptors/auth.interceptor.js';
+import { FilesMiddleware } from '../middlewares/files.middleware.js';
 
 const debug = createDebug('social:router:users');
 
@@ -11,6 +12,7 @@ export const usersRouter = Router();
 debug('loaded');
 
 const repo = UsersMongoRepo.getInstance();
+const fileStore = new FilesMiddleware();
 const controller = new UsersController(repo);
 const interceptor = new AuthInterceptor(repo);
 
@@ -28,7 +30,12 @@ usersRouter.get(
   controller.get.bind(controller)
 );
 // Add user
-usersRouter.post('/register', controller.register.bind(controller));
+usersRouter.post(
+  '/register',
+  fileStore.singleFileStore('image', 10_000_000).bind(fileStore),
+  fileStore.saveImage.bind(fileStore),
+  controller.register.bind(controller)
+);
 
 // Login user
 usersRouter.post('/login', controller.login.bind(controller));

@@ -104,3 +104,49 @@ Se crea la rama de configuración y utiliza
     - admin
     - fromToken
   - Tests
+
+## Images Upload
+
+En el registro se incorpora la capacidad de recibir/almacenar imágenes
+
+Se instala Multer
+
+```shell
+npm i multer
+npm i -D @types/multer
+```
+
+Se añade como middleware
+
+```js
+import multer from 'multer';
+const upload = multer({ dest: 'uploads/' })
+// in the route
+upload.single('image')
+```
+
+upload.single() devuelve un middleware que se coloca antes del controller que debe recibir las imágenes
+
+Se encapsula multer y su configuración en la clase FilesMiddleware
+
+Su método singleFileStore
+
+- crea un objeto con la configuración de Multer
+  - storage: folder/filName
+  - limits: fileSize
+- devuelve el middleware creado por Multer
+    // Save as req.file is the `fileName` file
+    // req.body will hold the text fields, if there were any
+
+Un segundo método
+
+- recoge el valor de req.file.filename
+- lo convierte en una url válida
+- lo pasa a req.body.image
+    (campo previsto en el Schema para la url de la imagen)
+
+Este mismo método podría crear una copia de la imagen en algún sistema de almacenamiento (e.g. Firebase)
+
+## Images Optimization an backup
+
+## Data validation
