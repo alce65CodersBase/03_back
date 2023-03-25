@@ -5,4 +5,5 @@ export interface Repo<T> {
   create(payload: Partial<T>): Promise<T>;
   update(payload: Partial<T>): Promise<T>;
   destroy(id: string): Promise<void>;
+  destroyAll(): Promise<void>;
 }

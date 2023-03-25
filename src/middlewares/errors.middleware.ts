@@ -11,7 +11,7 @@ export const errorsMiddleware = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction
 ) => {
-  debug('Middleware de errores');
+  debug('Call');
 
   let status = 500;
   let statusMessage = 'Internal server error';

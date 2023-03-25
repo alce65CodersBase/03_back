@@ -16,6 +16,7 @@ describe('Given AuthInterceptor class', () => {
     queryId: jest.fn(),
     update: jest.fn(),
     destroy: jest.fn(),
+    destroyAll: jest.fn(),
   };
   const interceptor = new AuthInterceptor(repo);
 

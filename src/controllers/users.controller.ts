@@ -20,8 +20,6 @@ export class UsersController extends BaseController<User> {
       if (!req.body.email || !req.body.passwd)
         throw new HTTPError(401, 'Unauthorized', 'Invalid Email or password');
       req.body.passwd = await Auth.hash(req.body.passwd);
-      req.body.friends = [];
-      req.body.enemies = [];
       const data = await this.repo.create(req.body);
       resp.status(201);
       resp.json({
@@ -92,6 +90,18 @@ export class UsersController extends BaseController<User> {
       const actualUser = await this.repo.update(user);
       resp.json({
         results: [actualUser],
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteAll(req: Request, resp: Response, next: NextFunction) {
+    try {
+      debug('delete');
+      await this.repo.destroyAll();
+      resp.json({
+        results: [],
       });
     } catch (error) {
       next(error);

@@ -1,3 +1,5 @@
+import { ImageInfo } from '../interfaces/image';
+
 export type Role = 'admin' | 'user';
 
 export type User = {
@@ -7,5 +9,5 @@ export type User = {
   firstName: string;
   surname: string;
   role: string;
-  image: string;
+  image: ImageInfo;
 };

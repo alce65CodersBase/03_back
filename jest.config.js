@@ -2,7 +2,7 @@
 export default {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['dist'],
+  testPathIgnorePatterns: ['dist', 'node_modules'],
   resolver: 'jest-ts-webcompat-resolver',
   collectCoverageFrom: ['src/**/*.ts'],
   coveragePathIgnorePatterns: ['index.ts', 'routers', 'helpers/files.ts'],

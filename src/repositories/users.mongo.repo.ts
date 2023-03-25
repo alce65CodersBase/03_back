@@ -61,4 +61,9 @@ export class UsersMongoRepo implements Repo<User> {
     if (!data)
       throw new HTTPError(404, 'Not found', 'Delete not posible: id not found');
   }
+
+  async destroyAll(): Promise<void> {
+    debug('destroy all');
+    await UserModel.deleteMany().exec();
+  }
 }

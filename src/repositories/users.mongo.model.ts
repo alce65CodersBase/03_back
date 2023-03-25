@@ -26,7 +26,7 @@ const userSchema = new Schema<User>({
     enum: ['user', 'admin'],
   },
   image: {
-    type: String,
+    type: Object,
   },
 });
 

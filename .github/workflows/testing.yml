@@ -24,3 +24,6 @@ jobs:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_CLUSTER: ${{ secrets.DB_CLUSTER }}
           DB_NAME: ${{ secrets.DB_NAME }}
+          FIRE_BASE_API_KEY: ${{ secrets.FIRE_BASE_API_KEY }}
+          FIRE_BASE_MESSAGING_SENDER_ID: ${{ secrets.FIRE_BASE_MESSAGING_SENDER_ID }}
+          FIRE_BASE_APP_ID: ${{ secrets.FIRE_BASE_APP_ID }}
