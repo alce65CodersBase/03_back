@@ -138,15 +138,83 @@ Su método singleFileStore
     // Save as req.file is the `fileName` file
     // req.body will hold the text fields, if there were any
 
+Los datos guardados en req.file corresponden al siguiente formato
+
+```ts
+{
+  fieldname: 'image',
+  originalname: 'pepe.png',
+  encoding: '7bit',
+  mimetype: 'image/png',
+  destination: 'uploads',
+  filename: 'pepe-c179a6c2-d135-4c6c-a213-d456237bbe61.png',
+  path: 'uploads\\pepe-c179a6c2-d135-4c6c-a213-d456237bbe61.png',
+  size: 94675
+}
+```
+
 Un segundo método
 
 - recoge el valor de req.file.filename
 - lo convierte en una url válida
-- lo pasa a req.body.image
+- lo pasa a req.body.${req.file.fieldname}
     (campo previsto en el Schema para la url de la imagen)
 
 Este mismo método podría crear una copia de la imagen en algún sistema de almacenamiento (e.g. Firebase)
 
-## Images Optimization an backup
+## BackUp
+
+Se modifica la entidad y el schema de mongoose para que las propiedad image
+sea un objeto que pueda almacenar toda la información de la imagen.
+
+Se incorpora la configuración de Firebase a la aplicación
+
+```shell
+npm install firebase
+```
+
+Se añade la configuración de FireBase en .env y en el fichero de configuraciones
+Se actualiza los secrets en GitHub y en las GitHub Actions
+
+Se crea una clase FireBase que configura el Store
+
+```ts
+// Import the functions you need from the SDKs you need
+import { initializeApp ... } from "firebase/app";
+import { getStorage ... } from 'firebase/storage';
+import { firebaseConfig } from '../config.js';
+
+constructor() {
+      // Initialize Firebase
+    this.app = initializeApp(firebaseConfig);
+    this.storage = getStorage(this.app);
+}
+```
+
+Se crea el método uploadFile capaz de:
+
+- leer el fichero con la imagen desde el FS
+- definir una ref de FireStore
+- cargar los datos del fichero en la ref
+- devolver la url para recuperar el fichero desde firebase
+
+Se incorpora en el middleware saveImage
+la llamada a la clase FireBase para salvar una copia de la imagen en
+FireBase junto con la que se guarda en el servidor
+
+## Images Optimization
+
+Se instala Sharp
+
+```shell
+npm i sharp
+npm i -D @types/sharp
+```
+
+Se añade un nuevo método a la clase FilesMiddleware
+Se transforma y re-dimensiona el fichero en base a una configuración pre-establecida para las imágenes de una ruta concreta (e.g. registro), que se obtiene directamente de la request
+
+Se actualizan todos los datos del objeto req.file. creado por multer con la información del fichero original
+
 
 ## Data validation
