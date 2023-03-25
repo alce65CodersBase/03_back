@@ -90,12 +90,8 @@ export class FilesMiddleware {
         throw new HTTPError(406, 'Not Acceptable', 'Not valid image file');
       const userImage = req.file.filename;
       const imagePath = path.join('uploads', userImage);
-
       const firebase = new FireBase();
       const fileBackup = await firebase.uploadFile(userImage);
-
-      const backUpField = req.file.fieldname + 'Out';
-
       req.body[req.file.fieldname] = {
         urlOriginal: req.file.originalname,
         url: imagePath,
@@ -103,7 +99,6 @@ export class FilesMiddleware {
         mimetype: req.file.mimetype,
         size: req.file.size,
       };
-
       next();
     } catch (error) {
       next(error);

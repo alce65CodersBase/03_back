@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import { User } from '../entities/user';
-import { ImageInfo } from '../interfaces/image';
 
 const userSchema = new Schema<User>({
   email: {
