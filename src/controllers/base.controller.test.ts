@@ -14,6 +14,7 @@ describe('Given BaseController class extended in a TestController', () => {
     queryId: jest.fn(),
     update: jest.fn(),
     destroy: jest.fn(),
+    destroyAll: jest.fn(),
   };
   const controller = new TestController(repo);
 

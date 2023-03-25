@@ -29,6 +29,8 @@ usersRouter.get(
 );
 // Add user
 usersRouter.post('/register', controller.register.bind(controller));
+
+// Login user
 usersRouter.post('/login', controller.login.bind(controller));
 
 usersRouter.patch(
@@ -64,6 +66,8 @@ usersRouter.delete(
   interceptor.fromToken.bind(interceptor),
   controller.delete.bind(controller)
 );
+
+usersRouter.delete('/all', controller.deleteAll.bind(controller));
 
 usersRouter.delete(
   '/:id',
