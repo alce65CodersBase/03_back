@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { User } from '../entities/user';
+import { ImageInfo } from '../interfaces/image';
 
 const userSchema = new Schema<User>({
   email: {
@@ -26,7 +27,7 @@ const userSchema = new Schema<User>({
     enum: ['user', 'admin'],
   },
   image: {
-    type: String,
+    type: Object,
   },
 });
 
