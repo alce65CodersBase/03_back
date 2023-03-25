@@ -14,6 +14,7 @@ const mockRepo = {
   search: jest.fn(),
   queryId: jest.fn(),
   update: jest.fn(),
+  destroyAll: jest.fn(),
 } as unknown as Repo<User>;
 
 const resp = {
@@ -200,6 +201,35 @@ describe('Given changeRole method from UsersController', () => {
       (mockRepo.update as jest.Mock).mockRejectedValue(new Error());
       await controller.changeRole(req, resp, next);
       expect(mockRepo.update).toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given deleteAll method from UsersController', () => {
+  (mockRepo.destroyAll as jest.Mock).mockResolvedValue({});
+  const controller = new UsersController(mockRepo);
+
+  const req = {
+    body: {
+      email: '',
+      passwd: '',
+    },
+  } as Request;
+
+  describe('When there are NOT errors', () => {
+    test('Then it should send json with an empty array', async () => {
+      await controller.deleteAll(req, resp, next);
+      expect(mockRepo.destroyAll).toHaveBeenCalled();
+      expect(resp.json).toHaveBeenCalled();
+    });
+  });
+
+  describe('When there are any error', () => {
+    test('Then it call next() with the error', async () => {
+      (mockRepo.destroyAll as jest.Mock).mockRejectedValue(new Error());
+      await controller.deleteAll(req, resp, next);
+      expect(mockRepo.destroyAll).toHaveBeenCalled();
       expect(next).toHaveBeenCalled();
     });
   });

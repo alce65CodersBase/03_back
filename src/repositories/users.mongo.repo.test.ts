@@ -116,4 +116,18 @@ describe('Given UsersMongoRepo', () => {
       expect(async () => repo.destroy(id)).rejects.toThrow();
     });
   });
+
+  describe('When I use destroyAll', () => {
+    beforeEach(() => {
+      UserModel.deleteMany = jest.fn().mockReturnValue({
+        exec,
+      });
+    });
+
+    test('Then it should return void after it has delete all data', async () => {
+      exec.mockResolvedValue({});
+      await repo.destroyAll();
+      expect(UserModel.deleteMany).toHaveBeenCalled();
+    });
+  });
 });
