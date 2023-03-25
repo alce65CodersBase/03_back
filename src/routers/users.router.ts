@@ -33,6 +33,7 @@ usersRouter.get(
 usersRouter.post(
   '/register',
   fileStore.singleFileStore('image', 10_000_000).bind(fileStore),
+  fileStore.optimization.bind(fileStore),
   fileStore.saveImage.bind(fileStore),
   controller.register.bind(controller)
 );
