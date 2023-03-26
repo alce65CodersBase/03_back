@@ -3,10 +3,10 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import createDebug from 'debug';
-import { dirNameGet } from './services/files.js';
-import { usersRouter } from './routers/users.router.js';
-import { errorsMiddleware } from './middleware/errors.middleware.js';
-import { HomeController } from './controllers/home.controller.js';
+import { dirNameGet } from '../services/files.js';
+import { usersRouter } from '../routers/users.router.js';
+import { errorsMiddleware } from '../middleware/errors.middleware.js';
+import { HomeController } from '../controllers/home.controller.js';
 
 const debug = createDebug('Social:app');
 const dirname = dirNameGet();

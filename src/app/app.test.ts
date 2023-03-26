@@ -1,7 +1,7 @@
 import { App } from './app';
-import { HomeController } from './controllers/home.controller';
+import { HomeController } from '../controllers/home.controller';
 
-jest.mock('./services/files.js', () => ({
+jest.mock('../services/files.js', () => ({
   dirNameGet: () => '__dirname result',
 }));
 
