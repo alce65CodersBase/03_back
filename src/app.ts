@@ -3,7 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import createDebug from 'debug';
-import { dirNameGet } from './helpers/files.js';
+import { dirNameGet } from './services/files.js';
 import { usersRouter } from './routers/users.router.js';
 import { errorsMiddleware } from './middlewares/errors.middleware.js';
 import { HomeController } from './controllers/home.controller.js';
