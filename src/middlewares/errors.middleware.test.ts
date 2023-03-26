@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { errorsMiddleware } from './errors.middleware';
 import { Error as MongooseError } from 'mongoose';
 import { HTTPError } from '../errors/errors';
+import { ValidationError, errors } from 'express-validation';
 
 describe('Given errorsMiddleware', () => {
   const req = {} as Request;
@@ -26,6 +27,24 @@ describe('Given errorsMiddleware', () => {
     test('Then status should be 406', () => {
       // Arrange
       const error = new MongooseError.ValidationError();
+      // Act
+      errorsMiddleware(error, req, resp, next);
+      // Assert
+      expect(resp.status).toHaveBeenLastCalledWith(406);
+    });
+  });
+
+  describe('When the error is a express Validation Error', () => {
+    let error: ValidationError;
+    beforeEach(() => {
+      // Arrange
+      error = new ValidationError(
+        { body: [{ message: '' } as ValidationError] } as unknown as errors,
+        {}
+      );
+      error.statusCode = 406;
+    });
+    test('Then status should be 406', () => {
       // Act
       errorsMiddleware(error, req, resp, next);
       // Assert

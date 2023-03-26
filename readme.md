@@ -218,3 +218,25 @@ Se actualizan todos los datos del objeto req.file. creado por multer con la info
 
 
 ## Data validation
+
+Alternativas:
+
+- [express-validator](https://www.npmjs.com/package/express-validator) (606.083) - FEM Course
+- [express-validation](https://www.npmjs.com/package/express-validation) (66.579) - Bootcamp-Bcn
+  - usa [joi](https://www.npmjs.com/package/joi) (8.645.843): schema description language and data validator
+
+### Express-validation and joi
+
+```shell
+npm i express-validation
+```
+
+Se complementan las entities con los correspondientes Schemas de joy
+
+Se crea un middleware para los métodos de validación
+de cada una de las rutas que lo necesiten
+
+Se incorpora cada método a su ruta en el router
+(Si los datos llegan como Form Data se pasan primero por el middleware que extra del form los datos de los campos file y texto)
+
+Se actualiza el middleware de errores para que tenga en cuenta los errores de validación

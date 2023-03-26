@@ -10,6 +10,7 @@ const userSchema = new Schema<User>({
   passwd: {
     type: String,
     required: true,
+    match: /[a-zA-Z0-9]{5,16}/,
   },
   firstName: {
     type: String,
