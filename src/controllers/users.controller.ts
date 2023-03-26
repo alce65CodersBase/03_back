@@ -2,11 +2,11 @@ import { Response, Request, NextFunction } from 'express';
 import createDebug from 'debug';
 import { User } from '../entities/user';
 import { Repo } from '../repositories/repo.interface';
-import { HTTPError } from '../errors/errors.js';
+import { HTTPError } from '../types/errors.js';
 import { Auth } from '../services/auth.js';
 import { BaseController } from './base.controller.js';
-import { PayloadToken } from '../interfaces/token';
-import { RequestPlus } from '../interfaces/request';
+import { PayloadToken } from '../types/token';
+import { RequestPlus } from '../types/request';
 const debug = createDebug('Social:controller:users');
 export class UsersController extends BaseController<User> {
   constructor(public repo: Repo<User>) {

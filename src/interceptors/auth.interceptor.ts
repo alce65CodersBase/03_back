@@ -1,9 +1,9 @@
 import createDebug from 'debug';
 import { User } from '../entities/user';
 import { Repo } from '../repositories/repo.interface';
-import { RequestPlus } from '../interfaces/request';
+import { RequestPlus } from '../types/request';
 import { Response, NextFunction } from 'express';
-import { HTTPError } from '../errors/errors.js';
+import { HTTPError } from '../types/errors.js';
 import { Auth } from '../services/auth.js';
 
 const debug = createDebug('w6:interceptor');

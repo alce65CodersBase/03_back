@@ -1,5 +1,5 @@
 import http from 'http';
-import { App } from './app.js';
+import { App } from './app/app.js';
 import { dbConnect } from './db/db.connect.js';
 import createDebug from 'debug';
 import { HomeController } from './controllers/home.controller.js';

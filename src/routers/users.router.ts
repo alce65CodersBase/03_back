@@ -3,8 +3,8 @@ import createDebug from 'debug';
 import { UsersController } from '../controllers/users.controller.js';
 import { UsersMongoRepo } from '../repositories/users.mongo.repo.js';
 import { AuthInterceptor } from '../interceptors/auth.interceptor.js';
-import { FilesMiddleware } from '../middlewares/files.middleware.js';
-import { ValidationMiddleware } from '../middlewares/validation.middleware.js';
+import { FilesMiddleware } from '../middleware/files.middleware.js';
+import { ValidationMiddleware } from '../middleware/validation.middleware.js';
 
 const debug = createDebug('social:router:users');
 

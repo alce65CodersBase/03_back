@@ -1,6 +1,6 @@
 import { Error } from 'mongoose';
 import { NextFunction, Request, Response } from 'express';
-import { CustomError, HTTPError } from '../errors/errors.js';
+import { CustomError, HTTPError } from '../types/errors.js';
 import createDebug from 'debug';
 import { ValidationError } from 'express-validation';
 const debug = createDebug('Social:app:errors');

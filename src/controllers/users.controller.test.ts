@@ -3,8 +3,8 @@ import { User } from '../entities/user';
 import { Repo } from '../repositories/repo.interface';
 import { UsersController } from './users.controller';
 import { Auth } from '../services/auth.js';
-import { RequestPlus } from '../interfaces/request';
-import { PayloadToken } from '../interfaces/token';
+import { RequestPlus } from '../types/request';
+import { PayloadToken } from '../types/token';
 
 jest.mock('../services/auth.js');
 const mockPasswd = 'test';
