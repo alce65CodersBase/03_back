@@ -2,6 +2,7 @@ import { Error } from 'mongoose';
 import { NextFunction, Request, Response } from 'express';
 import { CustomError, HTTPError } from '../errors/errors.js';
 import createDebug from 'debug';
+import { ValidationError } from 'express-validation';
 const debug = createDebug('Social:app:errors');
 
 export const errorsMiddleware = (
@@ -31,6 +32,18 @@ export const errorsMiddleware = (
     statusMessage = 'Validation error in the request';
   }
 
+  if (error instanceof ValidationError) {
+    let messages = '';
+    if (error.details.body) {
+      messages = error.details.body.map((item) => item.message).join('; ');
+    }
+
+    console.log(error);
+
+    status = error.statusCode;
+    statusMessage = 'Validation error in the request. ' + messages;
+  }
+
   resp.status(status);
   resp.json({
     error: [
@@ -40,5 +53,5 @@ export const errorsMiddleware = (
       },
     ],
   });
-  debug(status, statusMessage, error.message);
+  debug(status, statusMessage, '|', error.message);
 };
