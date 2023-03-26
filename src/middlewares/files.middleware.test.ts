@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { FilesMiddleware } from './files.middleware';
-import { HTTPError } from '../errors/errors';
+import { HTTPError } from '../types/errors';
 import multer from 'multer';
 import { FireBase } from '../services/firebase';
 import sharp from 'sharp';

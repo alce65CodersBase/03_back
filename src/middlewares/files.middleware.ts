@@ -1,11 +1,11 @@
 import path from 'path';
 import crypto from 'crypto';
 import { NextFunction, Request, Response } from 'express';
-import { RequestPlus } from '../interfaces/request.js';
+import { RequestPlus } from '../types/request.js';
 import multer from 'multer';
 import sharp from 'sharp';
 import createDebug from 'debug';
-import { HTTPError } from '../errors/errors.js';
+import { HTTPError } from '../types/errors.js';
 import { FireBase } from '../services/firebase.js';
 const debug = createDebug('Social:middleware:files');
 

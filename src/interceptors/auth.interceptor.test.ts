@@ -3,8 +3,8 @@ import { User } from '../entities/user';
 import { Repo } from '../repositories/repo.interface';
 import { AuthInterceptor } from './auth.interceptor';
 import { Auth } from '../services/auth';
-import { RequestPlus } from '../interfaces/request';
-import { HTTPError } from '../errors/errors';
+import { RequestPlus } from '../types/request';
+import { HTTPError } from '../types/errors';
 
 jest.mock('../services/auth');
 

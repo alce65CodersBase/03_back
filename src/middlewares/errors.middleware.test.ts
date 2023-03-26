@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { errorsMiddleware } from './errors.middleware';
 import { Error as MongooseError } from 'mongoose';
-import { HTTPError } from '../errors/errors';
+import { HTTPError } from '../types/errors';
 import { ValidationError, errors } from 'express-validation';
 
 describe('Given errorsMiddleware', () => {

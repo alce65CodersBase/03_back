@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { config } from '../config.js';
-import { HTTPError } from '../errors/errors.js';
+import { HTTPError } from '../types/errors.js';
 import createDebug from 'debug';
-import { PayloadToken } from '../interfaces/token.js';
+import { PayloadToken } from '../types/token.js';
 const debug = createDebug('W6:services:auth');
 
 debug('Loaded Static class');

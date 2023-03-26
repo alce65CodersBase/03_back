@@ -1,5 +1,5 @@
 import { Joi } from 'express-validation';
-import { ImageInfo } from '../interfaces/image';
+import { ImageInfo } from '../types/image';
 
 export type Role = 'admin' | 'user';
 

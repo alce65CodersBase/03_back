@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { PayloadToken } from '../interfaces/token';
+import { PayloadToken } from '../types/token';
 import { Auth } from './auth';
 
 jest.mock('jsonwebtoken');
