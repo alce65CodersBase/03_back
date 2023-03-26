@@ -1,4 +1,4 @@
-import { Joi, ValidationError } from 'express-validation';
+import { Joi } from 'express-validation';
 import { ImageInfo } from '../interfaces/image';
 
 export type Role = 'admin' | 'user';

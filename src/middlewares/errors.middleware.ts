@@ -38,8 +38,6 @@ export const errorsMiddleware = (
       messages = error.details.body.map((item) => item.message).join('; ');
     }
 
-    console.log(error);
-
     status = error.statusCode;
     statusMessage = 'Validation error in the request. ' + messages;
   }
