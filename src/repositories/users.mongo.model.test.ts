@@ -26,7 +26,7 @@ describe('Given Users Mongoose Schema and Model', () => {
       expect(Schema.prototype.set).not.toHaveBeenCalled();
     });
     afterEach(async () => {
-      await UserModel.deleteMany();
+      UserModel.deleteMany();
       mongoose.disconnect();
     });
   });

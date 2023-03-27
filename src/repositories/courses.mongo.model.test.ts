@@ -24,7 +24,7 @@ describe('Given Courses Mongoose Schema and Model', () => {
       }
     });
     afterEach(async () => {
-      await CourseModel.deleteMany();
+      CourseModel.deleteMany();
       mongoose.disconnect();
     });
   });
