@@ -4,11 +4,12 @@ import { dbConnect } from '../db/db.connect';
 import { User } from '../entities/user';
 
 describe('Given Users Mongoose Schema and Model', () => {
+  const PWD = '12345';
   const mockUser: Partial<User> = {
     firstName: 'test',
     surname: 'test',
     email: 'sample@sample.com',
-    passwd: '12345',
+    passwd: PWD,
   };
   Schema.prototype.set = jest.fn();
   const spyModel = jest.spyOn(mongoose, 'model');
