@@ -63,7 +63,7 @@ Se crea la rama de configuración y utiliza
 - Creación de la PR
 - Verificación de la PR
 
-## Initial server
+## Initial server for Users
 
 - Mongoose connection;
   - DB config file;
@@ -105,7 +105,7 @@ Se crea la rama de configuración y utiliza
     - fromToken
   - Tests
 
-## Images Upload
+### Images Upload
 
 En el registro se incorpora la capacidad de recibir/almacenar imágenes
 
@@ -162,7 +162,7 @@ Un segundo método
 
 Este mismo método podría crear una copia de la imagen en algún sistema de almacenamiento (e.g. Firebase)
 
-## BackUp
+### BackUp
 
 Se modifica la entidad y el schema de mongoose para que las propiedad image
 sea un objeto que pueda almacenar toda la información de la imagen.
@@ -202,7 +202,7 @@ Se incorpora en el middleware saveImage
 la llamada a la clase FireBase para salvar una copia de la imagen en
 FireBase junto con la que se guarda en el servidor
 
-## Images Optimization
+### Images Optimization
 
 Se instala Sharp
 
@@ -217,7 +217,7 @@ Se transforma y re-dimensiona el fichero en base a una configuración pre-establ
 Se actualizan todos los datos del objeto req.file. creado por multer con la información del fichero original
 
 
-## Data validation
+### Data validation
 
 Alternativas:
 
@@ -240,3 +240,15 @@ Se incorpora cada método a su ruta en el router
 (Si los datos llegan como Form Data se pasan primero por el middleware que extra del form los datos de los campos file y texto)
 
 Se actualiza el middleware de errores para que tenga en cuenta los errores de validación
+
+## Courses
+
+New endpoint for Angular Courses
+
+- Entity Course and Joi.Schema
+- Mongoose Schema and Model
+- Mongoose repository
+- Controller extends BaseController
+- Router
+- Update HomeController with the routes list
+- Router reference in app
