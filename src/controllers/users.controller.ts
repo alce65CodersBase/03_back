@@ -95,16 +95,4 @@ export class UsersController extends BaseController<User> {
       next(error);
     }
   }
-
-  async deleteAll(req: Request, resp: Response, next: NextFunction) {
-    try {
-      debug('delete');
-      await this.repo.destroyAll();
-      resp.json({
-        results: [],
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
 }
