@@ -80,4 +80,16 @@ export abstract class BaseController<T> {
       next(error);
     }
   }
+
+  async deleteAll(req: Request, resp: Response, next: NextFunction) {
+    try {
+      debug('delete all');
+      await this.repo.destroyAll();
+      resp.json({
+        results: [],
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
