@@ -28,27 +28,27 @@ describe('Given UsersMongoRepo', () => {
     });
   });
 
-  describe('When I use queryID', () => {
+  describe('When I use queryID in Users repo', () => {
     beforeEach(() => {
-      exec.mockResolvedValue({ id: '1' });
+      exec.mockResolvedValue({ id: '21' });
       UserModel.findById = jest.fn().mockReturnValue({
         exec,
       });
     });
-    test('Then it should return an object if it has a valid id', async () => {
-      const id = '1';
-      const result = await repo.queryId(id);
+    test('Then it should return an User if it has a valid id', async () => {
+      const id = '21';
+      const user = await repo.queryId(id);
       expect(exec).toHaveBeenCalled();
-      expect(result).toEqual({ id: '1' });
+      expect(user).toEqual({ id: '21' });
     });
     test('Then it should throw an error if it has a NO valid id', () => {
       exec.mockResolvedValue(null);
-      const id = '2';
+      const id = '22';
       expect(async () => repo.queryId(id)).rejects.toThrow();
     });
   });
 
-  describe('When I use search', () => {
+  describe('When I use search in Users repo', () => {
     beforeEach(() => {
       exec.mockResolvedValue([{ id: '1' }]);
       UserModel.find = jest.fn().mockReturnValue({
@@ -79,20 +79,20 @@ describe('Given UsersMongoRepo', () => {
 
   describe('When I use update', () => {
     beforeEach(() => {
-      exec.mockResolvedValue({ id: '2' });
+      exec.mockResolvedValue({ id: '20' });
       UserModel.findByIdAndUpdate = jest.fn().mockReturnValue({
         exec,
       });
     });
-    test('Then it should return an object with the updated item if it has a valid id', async () => {
-      const id = '1';
-      const result = await repo.update({ id });
+    test('Then it should return an user with the updated item if it has a valid id', async () => {
+      const id = '10';
+      const user = await repo.update({ id });
       expect(exec).toHaveBeenCalled();
-      expect(result).toEqual({ id: '2' });
+      expect(user).toEqual({ id: '20' });
     });
     test('Then it should throw an error if it has a NO valid id', () => {
       exec.mockResolvedValue(null);
-      const id = '2';
+      const id = '20';
       expect(async () => repo.update({ id })).rejects.toThrow();
     });
   });
