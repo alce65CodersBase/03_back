@@ -62,17 +62,17 @@ usersRouter.patch(
 );
 
 usersRouter.patch(
-  '/:id',
-  interceptor.logged.bind(interceptor),
-  interceptor.admin.bind(interceptor),
-  controller.patch.bind(controller)
-);
-
-usersRouter.patch(
   '/role/:id:/:role',
   interceptor.logged.bind(interceptor),
   interceptor.admin.bind(interceptor),
   controller.changeRole.bind(controller)
+);
+
+usersRouter.patch(
+  '/:id',
+  interceptor.logged.bind(interceptor),
+  interceptor.admin.bind(interceptor),
+  controller.patch.bind(controller)
 );
 
 usersRouter.delete(

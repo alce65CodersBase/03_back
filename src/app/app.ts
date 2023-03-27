@@ -5,6 +5,7 @@ import cors from 'cors';
 import createDebug from 'debug';
 import { dirNameGet } from '../services/files.js';
 import { usersRouter } from '../routers/users.router.js';
+import { coursesRouter } from '../routers/courses.router.js';
 import { errorsMiddleware } from '../middleware/errors.middleware.js';
 import { HomeController } from '../controllers/home.controller.js';
 
@@ -32,6 +33,7 @@ export class App {
     this.app.get('/', homeController.homeInfo.bind(homeController));
 
     this.app.use('/users', usersRouter);
+    this.app.use('/courses', coursesRouter);
     this.app.use(errorsMiddleware);
   }
 }
