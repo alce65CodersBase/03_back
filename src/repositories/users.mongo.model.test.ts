@@ -1,18 +1,31 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { UserModel } from './users.mongo.model';
 import { dbConnect } from '../db/db.connect';
+import { User } from '../entities/user';
 
 describe('Given Users Mongoose Schema and Model', () => {
+  const mockUser: Partial<User> = {
+    firstName: 'test',
+    surname: 'test',
+    email: 'sample@sample.com',
+    passwd: '12345',
+  };
   Schema.prototype.set = jest.fn();
   const spyModel = jest.spyOn(mongoose, 'model');
   describe('When Model is created', () => {
+    beforeEach(async () => {
+      await dbConnect();
+      await UserModel.create(mockUser);
+    });
     test('Then it should be used for obtain a Mongoose Document', async () => {
-      await dbConnect('dev');
       expect(spyModel).not.toHaveBeenCalled();
       const [document] = await UserModel.find().exec();
       document.toJSON();
       expect(document).toBeInstanceOf(Document);
       expect(Schema.prototype.set).not.toHaveBeenCalled();
+    });
+    afterEach(async () => {
+      await UserModel.deleteMany();
       mongoose.disconnect();
     });
   });
